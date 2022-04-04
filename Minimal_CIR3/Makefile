@@ -20,4 +20,4 @@ clean:
 	rm -rf *.o *.exe *.zip
 
 zip: 
-	zip test_files.zip *.c -x main.c
+	zip test_files.zip *.c *.h -x main.c

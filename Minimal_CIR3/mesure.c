@@ -65,7 +65,7 @@ oxy mesureTest(char *filename)
 				{
 					// Full period
 					BPM[BPM_index] = 30000.0f / counter;
-					RsIR[BPM_index] = ir_dc_average * (r_maximum = r_minimum) / (r_dc_average * (ir_maximum - ir_minimum));
+					RsIR[BPM_index] = ir_dc_average * (r_maximum - r_minimum) / (r_dc_average * (ir_maximum - ir_minimum));
 					BPM_index = (BPM_index + 1) % 8;
 
 					zero_count = 1;
@@ -99,11 +99,14 @@ oxy mesureTest(char *filename)
 		previous = data;
 	} while (file_state != EOF);
 
-	BPM[0] = (BPM[0] + BPM[1] + BPM[2] + BPM[3] + BPM[4] + BPM[5] + BPM[6] + BPM[7]) / 8.0f;
-	RsIR[0] = (RsIR[0] + RsIR[1] + RsIR[2] + RsIR[3] + RsIR[4] + RsIR[5] + RsIR[6] + RsIR[7]) / 8.0f;
-	
-	printf("BPM : %d\n", (int)BPM[0]);
-	//printf()
+	myOxy.pouls = (BPM[0] + BPM[1] + BPM[2] + BPM[3] + BPM[4] + BPM[5] + BPM[6] + BPM[7]) / 8.0f;
+	float ratio = (RsIR[0] + RsIR[1] + RsIR[2] + RsIR[3] + RsIR[4] + RsIR[5] + RsIR[6] + RsIR[7]) / 8.0f;
+
+	if(ratio > 1) {
+		myOxy.spo2 = (int) ((3.4f - ratio) * 50.0f / (3.4f - 2));
+	} else {
+		myOxy.spo2 = (int) ((0.8f - ratio) * 10.0f / (0.8f - 0.4f) + 90);
+	}
 
 	return myOxy;
 }
