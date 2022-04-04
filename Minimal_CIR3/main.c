@@ -9,6 +9,7 @@ int main()
     printf("Yolo!\n");
     int etat=0;
     absorp myAbsorp;
+    
     // oxy myOxy;
     // param_fir* myFIR = init_fir(...); // init FIR
     // param_iir* myIIR = init_iir(...); // init IIR
@@ -26,6 +27,7 @@ int main()
     // fin_mesure(myMes);
     // fin_iir(myIIR);
     // fin_fir(myFIR) 
+
     return EXIT_SUCCESS;
 }
 
