@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int main() {
-    printf("Yolo!");
+    printf("Yolo!\n");
 
     return EXIT_SUCCESS;
 }
