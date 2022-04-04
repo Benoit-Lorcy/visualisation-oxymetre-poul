@@ -6,34 +6,34 @@
 #include <stdlib.h>
 
 /*! ------------------------------------------------------------
-  
+
   \struct absorp
- 
+
   \brief measures
-  
+
   ------------------------------------------------------------*/
 
-typedef struct{
-		float acr;  /*!< AC R */
-		float dcr;  /*!< DC R */
-		float acir;  /*!< AC IR */
-		float dcir;  /*!< DC IR */
-	} absorp;
+typedef struct
+{
+	float acr;	/*!< AC R */
+	float dcr;	/*!< DC R */
+	float acir; /*!< AC IR */
+	float dcir; /*!< DC IR */
+	`
+} absorp;
 
 /*! ------------------------------------------------------------
-  
+
   \struct oxy
- 
-  \brief   
-  
+
+  \brief
+
   ------------------------------------------------------------*/
 
-typedef struct{
-		int spo2;  /*!< SPO2 */
-		int pouls;  /*!< Pouls */
-	} oxy;
-
-
-
+typedef struct
+{
+	int spo2;  /*!< SPO2 */
+	int pouls; /*!< Pouls */
+} oxy;
 
 #endif // DEFINE_H
