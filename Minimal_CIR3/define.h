@@ -19,7 +19,6 @@ typedef struct
 	float dcr;	/*!< DC R */
 	float acir; /*!< AC IR */
 	float dcir; /*!< DC IR */
-	`
 } absorp;
 
 /*! ------------------------------------------------------------
