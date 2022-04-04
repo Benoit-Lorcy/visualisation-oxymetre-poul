@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-<<<<<<< HEAD
 #include "lecture.h"
+#include "mesure.h"
 
 int main()
 {
     printf("Yolo!\n");
+ 
+    mesureTest("../fichiers/record1_iir.dat");
     int etat=0;
     absorp myAbsorp;
     
