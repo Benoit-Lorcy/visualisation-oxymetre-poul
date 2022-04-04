@@ -3,7 +3,8 @@
 absorp iirTest(char* filename){
 	absorp	myAbsorp;
 	
-	return myAbsorp;
+	
 
+	return myAbsorp;
 }
 
