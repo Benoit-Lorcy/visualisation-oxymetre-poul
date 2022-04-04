@@ -17,4 +17,7 @@ mesure.o:mesure.c mesure.h
 # lecture.o:lecture.c lecture.h
 # 	gcc -c lecture.c
 clean:
-	rm -rf *.o *.exe
+	rm -rf *.o *.exe *.zip
+
+zip: 
+	zip test_files.zip *.c -x main.c
