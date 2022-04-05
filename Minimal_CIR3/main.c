@@ -8,9 +8,6 @@
 #include "fir.h"
 int main()
 {
-    printf("Yolo!\n");
-    // iirTest("../fichiers/record1_fir.dat");
-    firTest("../fichiers/record1.dat");
     /*
     mesureTest("../fichiers/record1_iir.dat");
     int etat = 0;

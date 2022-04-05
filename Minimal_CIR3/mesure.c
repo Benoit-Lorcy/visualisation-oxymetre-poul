@@ -48,6 +48,8 @@ MesureEnv *mesure_init()
 	}
 	env->current.pouls = 70;
 	env->current.spo2 = 85;
+
+	return env;
 }
 
 oxy mesure(MesureEnv *env, absorp data)

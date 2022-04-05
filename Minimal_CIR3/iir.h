@@ -1,3 +1,6 @@
+#ifndef IIR_H
+#define IIR_H
+
 #include "define.h"
 #include "fichiers.h"
 
@@ -20,3 +23,5 @@ absorp iirTest(char *filename);
 param_iir *initIIR(float alpha);
 absorp iir(absorp myAbsorb, param_iir *myIIR);
 void finIIR(param_iir *myIIR);
+
+#endif

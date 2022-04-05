@@ -1,3 +1,6 @@
+#ifndef MESURE_H
+#define MESURE_H
+
 #include "define.h"
 
 typedef struct {
@@ -26,3 +29,5 @@ oxy mesureTest(char* filename);
 MesureEnv *mesure_init();
 oxy mesure(MesureEnv *env, absorp data);
 void mesure_close(MesureEnv *env);
+
+#endif
