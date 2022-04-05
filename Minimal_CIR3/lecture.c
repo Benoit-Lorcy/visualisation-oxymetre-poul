@@ -8,17 +8,15 @@ void *init_UART()
 }
 void close_UART()
 {
-
 }
 absorp read_UART(void *handle, int *file_state)
 {
-
 }
 
 absorp lecture(FILE *file_pf, int *file_state)
 {
 	absorp myAbsorp;
-	
+
 	char data[21];
 	char *data_ptr;
 	size_t bytes_read;
@@ -30,6 +28,35 @@ absorp lecture(FILE *file_pf, int *file_state)
 		// Error, sad face :(
 		*file_state = EOF;
 		return myAbsorp;
+	}
+
+	// Check if well formed
+	while (!(data[4] == ',' && data[4 + 5] == ',' && data[4 + 5 * 2] == ','))
+	{
+		int i = 0;
+		int first_weird_char = -1;
+		for (i = 0; i < 21; i++)
+		{
+			if (!((data[i] >= '0' && data[i] <= '9') || data[i] == ','))
+			{
+				if (first_weird_char == -1)
+				{
+					first_weird_char = i;
+				}
+			}
+		}
+
+		long pointer = ftell(file_pf) - 21 + first_weird_char + 1;
+		fseek(file_pf, pointer, SEEK_SET);
+
+		bytes_read = fread(data, sizeof(char), 21, file_pf);
+
+		if (bytes_read != 21)
+		{
+			// Error, sad face :(
+			*file_state = EOF;
+			return myAbsorp;
+		}
 	}
 
 	data_ptr = data;
@@ -47,7 +74,6 @@ absorp lecture(FILE *file_pf, int *file_state)
 
 	decode = (data_ptr[0] - '0') * 1000 + (data_ptr[1] - '0') * 100 + (data_ptr[2] - '0') * 10 + (data_ptr[3] - '0');
 	myAbsorp.dcir = (float)decode;
-	data_ptr += 5;
 
 	return myAbsorp;
 }
