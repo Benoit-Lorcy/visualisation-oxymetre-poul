@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*! ------------------------------------------------------------
 
@@ -15,10 +16,10 @@
 
 typedef struct
 {
-	float acr;	/*!< AC R */
-	float dcr;	/*!< DC R */
-	float acir; /*!< AC IR */
-	float dcir; /*!< DC IR */
+  float acr;  /*!< AC R */
+  float dcr;  /*!< DC R */
+  float acir; /*!< AC IR */
+  float dcir; /*!< DC IR */
 } absorp;
 
 /*! ------------------------------------------------------------
@@ -31,8 +32,8 @@ typedef struct
 
 typedef struct
 {
-	int spo2;  /*!< SPO2 */
-	int pouls; /*!< Pouls */
+  int spo2;  /*!< SPO2 */
+  int pouls; /*!< Pouls */
 } oxy;
 
 #endif // DEFINE_H

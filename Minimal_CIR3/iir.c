@@ -14,10 +14,16 @@ absorp iirTest(char *filename)
 		{
 			printf("%f, %f \n", myAbsorp.acir, myAbsorp.acr);
 			myAbsorp = iir(myAbsorp, myIIR);
-			printf("> %f, %f \n", myAbsorp.acir, myAbsorp.acr);
+			printf("> %f, %f, %f, %f \n", myAbsorp.acir, myAbsorp.acr, myAbsorp.dcir, myAbsorp.dcr);
 		}
 	} while (etat != EOF);
+	myAbsorp = myIIR->lastOutput;
+	myAbsorp.acr = (int)(myAbsorp.acr);
+	myAbsorp.acir = (int)(myAbsorp.acir);
+
+	finFichier(myFile);
 	finIIR(myIIR);
+
 	return myAbsorp;
 }
 
@@ -32,15 +38,18 @@ param_iir *initIIR(float alpha)
 	return myIIR;
 }
 
-absorp iir(absorp myAbsorb, param_iir *myIIR)
+absorp iir(absorp myAbsorp, param_iir *myIIR)
 {
-	absorp tempAbsorp = myAbsorb;
-	myAbsorb.acr = myAbsorb.acr - myIIR->lastInput.acr + myIIR->alpha * myIIR->lastOutput.acr;
-	myAbsorb.acir = myAbsorb.acir - myIIR->lastInput.acir + myIIR->alpha * myIIR->lastOutput.acir;
+	absorp tempAbsorp = myAbsorp;
+	myAbsorp.acr = myAbsorp.acr - myIIR->lastInput.acr + myIIR->alpha * myIIR->lastOutput.acr;
+	myAbsorp.acir = myAbsorp.acir - myIIR->lastInput.acir + myIIR->alpha * myIIR->lastOutput.acir;
 	myIIR->lastInput = tempAbsorp;
-	myIIR->lastOutput = myAbsorb;
+	myIIR->lastOutput = myAbsorp;
 
-	return myAbsorb;
+	myAbsorp.acr = (int)(myAbsorp.acr);
+	myAbsorp.acir = (int)(myAbsorp.acir);
+
+	return myAbsorp;
 }
 
 void finIIR(param_iir *myIIR)

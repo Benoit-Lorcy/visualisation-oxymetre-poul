@@ -58,6 +58,8 @@ absorp firTest(char *filename)
 	int etat = 0;
 	int ordreFiltre = 51;
 	absorp myAbsorp;
+	absorp saveAbsorp;
+
 	param_fir *myFIR = initFir(FIR_TAPS, ordreFiltre);
 
 	FILE *myFile = initFichier(filename);
@@ -68,14 +70,15 @@ absorp firTest(char *filename)
 		{
 			printf("%f, %f \n", myAbsorp.acir, myAbsorp.acr);
 			myAbsorp = fir(myAbsorp, myFIR);
-			printf("> %f, %f \n", myAbsorp.acir, myAbsorp.acr);
+			saveAbsorp = myAbsorp;
+			printf("> %f, %f, %f, %f \n", myAbsorp.acir, myAbsorp.acr, myAbsorp.dcir, myAbsorp.dcr);
 		}
 	} while (etat != EOF);
 
 	finFichier(myFile);
 	finFir(myFIR);
 
-	return myAbsorp;
+	return saveAbsorp;
 }
 
 param_fir *initFir(float *coefFiltre, int ordreFiltre)
@@ -100,19 +103,19 @@ absorp fir(absorp myAbsorp, param_fir *myFIR)
 		.dcir = myAbsorp.dcir,
 		.dcr = myAbsorp.dcr};
 
-	int i;
-	for (i = 0; i < myFIR->ordreFiltre - 1; i++)
-	{
-		myFIR->firBuffer[i + 1] = myFIR->firBuffer[i];
-	}
+	memmove(myFIR->firBuffer + 1, myFIR->firBuffer, sizeof(absorp) * (myFIR->ordreFiltre - 1));
 
 	myFIR->firBuffer[0] = myAbsorp;
 
+	int i;
 	for (i = 0; i < myFIR->ordreFiltre; i++)
 	{
 		tempAbsorb.acr += myFIR->coefFiltre[i] * myFIR->firBuffer[i].acr;
 		tempAbsorb.acir += myFIR->coefFiltre[i] * myFIR->firBuffer[i].acir;
 	}
+
+	tempAbsorb.acir = (int)(tempAbsorb.acir);
+	tempAbsorb.acr = (int)(tempAbsorb.acr);
 
 	return tempAbsorb;
 }
@@ -120,7 +123,7 @@ absorp fir(absorp myAbsorp, param_fir *myFIR)
 void finFir(param_fir *myFIR)
 {
 	// free all
-	// free(myFIR->firBuffer);
+	free(myFIR->firBuffer);
 	free(myFIR);
 	return;
 }
