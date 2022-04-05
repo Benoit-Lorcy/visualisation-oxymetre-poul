@@ -4,6 +4,7 @@
 #include "mesure.h"
 #include "define.h"
 #include "lecture.h"
+#include "iir.h"
 #include "fir.h"
 
 int main()
@@ -13,7 +14,7 @@ int main()
     absorp myAbsorp;
     oxy myOxy;
 
-    firTest("../fichiers/record1.dat");
+    iirTest("../fichiers/record1.dat");
 
     // param_fir* myFIR = init_fir(); // init FIR
     // param_iir* myIIR = init_iir(...); // init IIR

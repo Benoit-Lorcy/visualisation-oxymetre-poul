@@ -1,4 +1,22 @@
 #include "define.h"
+#include "fichiers.h"
 
+/*! ------------------------------------------------------------
 
-absorp iirTest(char* filename);
+  \struct param_fir
+
+  \brief
+
+  ------------------------------------------------------------*/
+
+typedef struct
+{
+    float alpha;
+    absorp lastInput;
+    absorp lastOutput;
+} param_iir;
+
+absorp iirTest(char *filename);
+param_iir *initIIR(float alpha);
+absorp iir(absorp myAbsorb, param_iir *myIIR);
+void finIIR(param_iir *myIIR);

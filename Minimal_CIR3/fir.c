@@ -64,10 +64,12 @@ absorp firTest(char *filename)
 	do
 	{
 		myAbsorp = lireFichier(myFile, &etat);
-		printf("%f, %f \n", myAbsorp.acir, myAbsorp.acr);
-		myAbsorp = fir(myAbsorp, myFIR);
-		printf("> %f, %f \n", myAbsorp.acir, myAbsorp.acr);
-
+		if (etat != EOF)
+		{
+			printf("%f, %f \n", myAbsorp.acir, myAbsorp.acr);
+			myAbsorp = fir(myAbsorp, myFIR);
+			printf("> %f, %f \n", myAbsorp.acir, myAbsorp.acr);
+		}
 	} while (etat != EOF);
 
 	finFichier(myFile);
@@ -83,6 +85,7 @@ param_fir *initFir(float *coefFiltre, int ordreFiltre)
 	myFIR->ordreFiltre = ordreFiltre;
 	// on met des 0 dans firBuffer comme ça on peut l'utiliser dans les calculs sans risque
 	// à la base j'avais un calloc mais moins on touche a la mémoire mieux on se porte ;)
+	// humm ça marche pas sans calloc :aled:
 	absorp firBuffer[51] = {0};
 	myFIR->firBuffer = calloc(ordreFiltre, sizeof(absorp));
 
