@@ -9,6 +9,6 @@
 #include "mesure.h"
 #include "affichage.h"
 
-void integrationTest(char* filename);
+void integrationTest(char *filename);
 
 #endif
