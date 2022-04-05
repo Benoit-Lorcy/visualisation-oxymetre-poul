@@ -4,16 +4,19 @@
 #include "fichiers.h"
 #include "lecture.h"
 #include "mesure.h"
-
+#include "iir.h"
+#include "fir.h"
 int main()
 {
     printf("Yolo!\n");
-
+    firTest("../fichiers/record1.dat");
+    /*
     mesureTest("../fichiers/record1_iir.dat");
     int etat = 0;
     absorp myAbsorp, a2;
     FILE *fp = fopen("../fichiers/record1_bin.dat", "r");
     FILE *fp2 = initFichier("../fichiers/record1.dat");
+
 
     while (etat != EOF)
     {
@@ -37,7 +40,7 @@ int main()
                 printf("DCIR : %f != %f\n", a2.dcir, myAbsorp.dcir);
             }
         }
-    }
+    }*/
 
     // oxy myOxy;
     // param_fir* myFIR = init_fir(...); // init FIR

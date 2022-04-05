@@ -17,7 +17,6 @@ absorp iirTest(char *filename)
 			printf("> %f, %f \n", myAbsorp.acir, myAbsorp.acr);
 		}
 	} while (etat != EOF);
-
 	finIIR(myIIR);
 	return myAbsorp;
 }

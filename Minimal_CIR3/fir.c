@@ -94,7 +94,12 @@ param_fir *initFir(float *coefFiltre, int ordreFiltre)
 
 absorp fir(absorp myAbsorp, param_fir *myFIR)
 {
-	absorp tempAbsorb;
+	absorp tempAbsorb = {
+		.acir = 0,
+		.acr = 0,
+		.dcir = myAbsorp.dcir,
+		.dcr = myAbsorp.dcr};
+
 	int i;
 	for (i = 0; i < myFIR->ordreFiltre - 1; i++)
 	{
@@ -115,7 +120,7 @@ absorp fir(absorp myAbsorp, param_fir *myFIR)
 void finFir(param_fir *myFIR)
 {
 	// free all
-	free(myFIR->firBuffer);
+	// free(myFIR->firBuffer);
 	free(myFIR);
 	return;
 }
