@@ -1,5 +1,5 @@
-prog.exe:main.c iir.o fir.o affichage.o fichiers.o integration.o mesure.o define.h # lecture.o # lecture.o -lftd2xx
-	gcc main.c iir.o fir.o affichage.o fichiers.o integration.o mesure.o -o prog.exe
+prog.exe:main.c iir.o fir.o affichage.o fichiers.o integration.o mesure.o define.h lecture.o # -lftd2xx
+	gcc main.c iir.o fir.o affichage.o fichiers.o integration.o mesure.o lecture.o -o prog.exe
 main.o:main.c main.h
 	gcc -c main.c
 iir.o:iir.c iir.h
@@ -14,8 +14,8 @@ integration.o:integration.c integration.h
 	gcc -c integration.c
 mesure.o:mesure.c mesure.h
 	gcc -c mesure.c
-# lecture.o:lecture.c lecture.h
-# 	gcc -c lecture.c
+lecture.o:lecture.c lecture.h
+	gcc -c lecture.c
 clean:
 	rm -rf *.o *.exe *.zip
 

@@ -11,6 +11,15 @@ int main()
     mesureTest("../fichiers/record1_iir.dat");
     int etat=0;
     absorp myAbsorp;
+    FILE* fp = fopen("../fichiers/record1_bin.dat", "r");
+
+    while(etat != EOF) {
+
+    myAbsorp = lecture(fp, &etat);
+
+    printf("%f : %f : %f : %f\n", myAbsorp.acr, myAbsorp.dcr, myAbsorp.acir, myAbsorp.dcir);
+    }
+
     
     // oxy myOxy;
     // param_fir* myFIR = init_fir(...); // init FIR
