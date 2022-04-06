@@ -8,7 +8,9 @@
 #include "iir.h"
 #include "mesure.h"
 #include "affichage.h"
+#include "lecture.h"
 
 void integrationTest(char *filename);
+void integrationTestUART();
 
 #endif

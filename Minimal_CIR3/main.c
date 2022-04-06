@@ -6,8 +6,11 @@
 #include "mesure.h"
 #include "iir.h"
 #include "fir.h"
+#include "integration.h"
+
 int main()
 {
+    integrationTestUART();
     /*
     mesureTest("../fichiers/record1_iir.dat");
     int etat = 0;

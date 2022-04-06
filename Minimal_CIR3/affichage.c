@@ -24,7 +24,7 @@ int FileExists(char *szPath)
 void affichage(oxy myOxy)
 {
 
-    if (FileExists(".verrouData"))
+    if (access(".verrouData", F_OK) != -1)
     {
         // Sad
     }

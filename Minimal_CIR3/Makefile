@@ -1,5 +1,5 @@
-prog.exe:main.c iir.o fir.o affichage.o fichiers.o integration.o mesure.o define.h lecture.o # -lftd2xx
-	gcc main.c iir.o fir.o affichage.o fichiers.o integration.o mesure.o lecture.o -o prog.exe
+prog.exe:main.c iir.o fir.o affichage.o fichiers.o integration.o mesure.o define.h lecture.o
+	gcc main.c iir.o fir.o affichage.o fichiers.o integration.o mesure.o lecture.o ftd2xx.lib -o prog.exe
 main.o:main.c main.h
 	gcc -c main.c
 iir.o:iir.c iir.h
