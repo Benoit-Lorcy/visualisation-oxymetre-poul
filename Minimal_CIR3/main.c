@@ -8,59 +8,26 @@
 #include "lecture.h"
 #include "mesure.h"
 
-int main() {
-    integrationTestUART();
-    /*
-    mesureTest("../fichiers/record1_iir.dat");
+int main(int argc, char **argv) {
+    if (argc < 2) {
+        printf(
+            "Not enought arguments\nTry reading README for more "
+            "information.\n");
+        return EXIT_FAILURE;
+    }
 
-    int etat = 0;
-    absorp myAbsorp, a2;
-    FILE *fp = fopen("../fichiers/record1_bin.dat", "r");
-    FILE *fp2 = initFichier("../fichiers/record1.dat");
-
-
-    while (etat != EOF)
-    {
-
-        myAbsorp = lecture(fp, &etat);
-        a2 = lireFichier(fp2, &etat);
-
-        printf("%f %f %f %f\n", myAbsorp.acr, myAbsorp.dcr, myAbsorp.acir,
-    myAbsorp.dcir); return 1;
-
-        if (a2.acr != myAbsorp.acr || a2.acir != myAbsorp.acir || a2.dcir !=
-    myAbsorp.dcir || a2.dcr != myAbsorp.dcr)
-        {
-            if(etat == EOF) break;
-            if(a2.acr != myAbsorp.acr) {
-                printf("ACR : %f != %f\n", a2.acr, myAbsorp.acr);
-            }if(a2.acir != myAbsorp.acir) {
-                printf("ACIR : %f != %f\n", a2.acir, myAbsorp.acir);
-            }if(a2.dcr != myAbsorp.dcr) {
-                printf("DCR : %f != %f\n", a2.dcr, myAbsorp.dcr);
-            }if(a2.dcir != myAbsorp.dcir) {
-                printf("DCIR : %f != %f\n", a2.dcir, myAbsorp.dcir);
-            }
+    if (strcmp("-file", argv[1]) == 0) {
+        if (argc < 3) {
+            printf("Please enter a path\n");
+            return EXIT_FAILURE;
         }
-    }*/
-
-    // oxy myOxy;
-    // param_fir* myFIR = init_fir(...); // init FIR
-    // param_iir* myIIR = init_iir(...); // init IIR
-    // param_mesure* myMes = init_mesure(...) // init mesure
-    // FILE* myFile = initFichier("record1.dat");
-
-    // do{
-    //     myAbsorp = lireFichier(myFile,&etat);
-    //     myAbsorp = fir(myAbsorp,myFIR);
-    //     myAbsorp = iir(myAbsorp,myIIR);
-    //     myOxy = mesure(myAbsorp,myMes);
-    //     affichage(myOxy);
-    // }while( etat != EOF )
-    // finFichier(myFile);
-    // fin_mesure(myMes);
-    // fin_iir(myIIR);
-    // fin_fir(myFIR)
+        integrationTest(argv[2]);
+    } else if (strcmp("-usb", argv[1]) == 0) {
+        printf("Warning : this will only work when compiled on windows\n");
+        integrationTestUART();
+    } else {
+        printf("illegal argument\n");
+    }
 
     return EXIT_SUCCESS;
 }
