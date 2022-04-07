@@ -22,7 +22,7 @@ $(OBJ): %.o : %.c
 
 # Clean the folder
 clean:
-	rm -rf *.exe *.o .zip  
+	rm -rf *.exe *.o .zip .verrouData Data.txt
 
 # Create zip for automatic tests
 zip: 

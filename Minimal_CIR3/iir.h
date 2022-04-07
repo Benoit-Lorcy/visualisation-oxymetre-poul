@@ -12,8 +12,7 @@
 
   ------------------------------------------------------------*/
 
-typedef struct
-{
+typedef struct {
     float alpha;
     absorp lastInput;
     absorp lastOutput;

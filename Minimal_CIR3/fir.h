@@ -12,8 +12,7 @@
 
   ------------------------------------------------------------*/
 
-typedef struct
-{
+typedef struct {
     absorp *firBuffer;
     float *coefFiltre;
     int ordreFiltre;
