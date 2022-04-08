@@ -22,6 +22,7 @@ absorp lecture(FILE *file_pf, int *file_state)
     {
         int i = 0;
         int first_weird_char = -1;
+        // Find the first weird character
         for (i = 0; i < 21; i++)
         {
             if (!((data[i] >= '0' && data[i] <= '9') || data[i] == ','))
@@ -37,9 +38,12 @@ absorp lecture(FILE *file_pf, int *file_state)
         {
             data2[i] = '-';
         }
+        // Move memory after the weird character to the start of data
         memcpy(data2, data + first_weird_char + 1, 21 - first_weird_char - 1);
 
         memcpy(data, data2, 21 - first_weird_char - 1);
+
+        // Read data equivalent to the length of the data that a thrown out
         bytes_read = fread(data + (21 - first_weird_char - 1), sizeof(char),
                 first_weird_char + 1, file_pf);
 
@@ -51,6 +55,7 @@ absorp lecture(FILE *file_pf, int *file_state)
         }
     }
 
+    // 1234 => 1 * 1000 + 2 * 100 + 3 * 10 + 4 * 1
     data_ptr = data;
     short decode = (data_ptr[0] - '0') * 1000 + (data_ptr[1] - '0') * 100 +
                    (data_ptr[2] - '0') * 10 + (data_ptr[3] - '0');
