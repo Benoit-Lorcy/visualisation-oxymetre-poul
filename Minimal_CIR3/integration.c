@@ -2,7 +2,7 @@
 
 void integrationTest(char *filename)
 {
-    /*float FIR_TAPS[51] = {
+    float FIR_TAPS[51] = {
         1.4774946e-019, 1.6465231e-004, 3.8503956e-004, 7.0848037e-004,
         1.1840522e-003, 1.8598621e-003, 2.7802151e-003, 3.9828263e-003,
         5.4962252e-003, 7.3374938e-003, 9.5104679e-003, 1.2004510e-002,
@@ -42,7 +42,7 @@ void integrationTest(char *filename)
 
     finFir(pfir);
     finIIR(piir);
-    mesure_close(pmesure);*/
+    mesure_close(pmesure);
 }
 
 void integrationTestUART()

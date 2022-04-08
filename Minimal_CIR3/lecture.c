@@ -1,15 +1,5 @@
 #include "lecture.h"
 
-/**
- *
- */
-#if defined(WIN32) || defined(_WIN32) || \
-    defined(__WIN32) && !defined(__CYGWIN__)
-
-#include <Windows.h> // comes first
-
-#include "ftd2xx.h"
-
 absorp lecture(FILE *file_pf, int *file_state)
 {
     absorp myAbsorp;
@@ -78,6 +68,16 @@ absorp lecture(FILE *file_pf, int *file_state)
 
     return myAbsorp;
 }
+
+/**
+ *
+ */
+#if defined(WIN32) || defined(_WIN32) || \
+    defined(__WIN32) && !defined(__CYGWIN__)
+
+#include <Windows.h> // comes first
+
+#include "ftd2xx.h"
 
 void *init_UART()
 {
@@ -196,6 +196,5 @@ absorp read_UART(void *handle, int *file_state)
 void *init_UART() {}
 void close_UART(void *handle) {}
 absorp read_UART(void *handle, int *file_state) {}
-absorp lecture(FILE *file_pf, int *file_state) {}
 
 #endif

@@ -39,6 +39,11 @@ void affichage(oxy myOxy) {
         // Sad
     } else {
         FILE *fp = fopen(".verrouData", "w");
+
+        if(fp == NULL) {
+            return;
+        }
+        
         fclose(fp);
 
         fp = fopen("Data.txt", "w");

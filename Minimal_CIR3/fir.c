@@ -27,11 +27,8 @@ absorp firTest(char *filename) {
     do {
         myAbsorp = lireFichier(myFile, &etat);
         if (etat != EOF) {
-            printf("%f, %f \n", myAbsorp.acir, myAbsorp.acr);
             myAbsorp = fir(myAbsorp, myFIR);
             saveAbsorp = myAbsorp;
-            printf("> %f, %f, %f, %f \n", myAbsorp.acir, myAbsorp.acr,
-                   myAbsorp.dcir, myAbsorp.dcr);
         }
     } while (etat != EOF);
 
