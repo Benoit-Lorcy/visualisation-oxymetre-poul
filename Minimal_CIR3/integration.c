@@ -55,6 +55,7 @@ void integrationTest(char *filename)
         1.6465231e-004,
         1.4774946e-019};
 
+    // initialize parameters for each part of the program to read a file
     FILE *f = initFichier(filename);
 
     param_fir *pfir = initFir(FIR_TAPS, 51);
@@ -63,6 +64,7 @@ void integrationTest(char *filename)
 
     int etat = !EOF;
 
+    // processing data in file
     do
     {
         absorp current = lireFichier(f, &etat);
@@ -74,10 +76,12 @@ void integrationTest(char *filename)
 
             oxy final = mesure(pmesure, current);
 
+            // write processeds data to file
             affichage(final);
         }
     } while (etat != EOF);
 
+    // free memory
     finFir(pfir);
     finIIR(piir);
     mesure_close(pmesure);
@@ -138,6 +142,7 @@ void integrationTestUART()
         1.6465231e-004,
         1.4774946e-019};
 
+    // initialize parameters for each part of the program to read USB
     void *uart = init_UART();
 
     param_fir *pfir = initFir(FIR_TAPS, 51);
@@ -145,6 +150,8 @@ void integrationTestUART()
     MesureEnv *pmesure = mesure_init();
 
     int etat = !EOF;
+
+    // processing UART
     do
     {
         printf("Start\n");
@@ -157,10 +164,12 @@ void integrationTestUART()
 
             oxy final = mesure(pmesure, current);
 
+            // write data to file
             affichage(final);
         }
     } while (etat != EOF);
 
+    // free memory
     finFir(pfir);
     finIIR(piir);
     mesure_close(pmesure);
