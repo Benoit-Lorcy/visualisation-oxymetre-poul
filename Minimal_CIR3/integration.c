@@ -65,7 +65,7 @@ void integrationTest(char *filename)
 
     do
     {
-        absorp current = lecture(f, &etat);
+        absorp current = lireFichier(f, &etat);
 
         if (etat != EOF)
         {
