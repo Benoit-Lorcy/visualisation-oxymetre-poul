@@ -9,13 +9,13 @@
  */
 typedef struct
 {
-    absorp *firBuffer;
-    float *coefFiltre;
-    int ordreFiltre;
+    absorp *firBuffer; /* Buffer containing ordreFiltre number of last elements */
+    float *coefFiltre; /* Coefficients for FIR filter */
+    int ordreFiltre;   /* Order of FIR filter */
 } param_fir;
 
 /**
- * @brief
+ * @brief FIR Filter function for automatic tests
  *
  * @param filename
  * @return absorp
@@ -23,7 +23,7 @@ typedef struct
 absorp firTest(char *filename);
 
 /**
- * @brief
+ * @brief FIR Filter initialisation
  *
  * @param coefFiltre
  * @param ordreFiltre
@@ -32,7 +32,7 @@ absorp firTest(char *filename);
 param_fir *initFir(float *coefFiltre, int ordreFiltre);
 
 /**
- * @brief
+ * @brief FIR : finite impulse response
  *
  * @param myAbsorb
  * @param myFIR
@@ -41,7 +41,7 @@ param_fir *initFir(float *coefFiltre, int ordreFiltre);
 absorp fir(absorp myAbsorb, param_fir *myFIR);
 
 /**
- * @brief
+ * @brief free memory allocated to param_fir at initialisation
  *
  * @param myFIR
  */
