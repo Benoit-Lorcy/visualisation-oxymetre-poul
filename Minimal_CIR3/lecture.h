@@ -13,21 +13,25 @@ void *init_UART();
 /**
  * @brief
  *
- * @return void*
+ * @param handle
  */
 void close_UART(void *handle);
 
 /**
  * @brief
  *
- * @return void*
+ * @param handle
+ * @param file_state
+ * @return absorp
  */
 absorp read_UART(void *handle, int *file_state);
 
 /**
  * @brief
  *
- * @return void*
+ * @param file_pf
+ * @param file_state
+ * @return absorp
  */
 absorp lecture(FILE *file_pf, int *file_state);
 

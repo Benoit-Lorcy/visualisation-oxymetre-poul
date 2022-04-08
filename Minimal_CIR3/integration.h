@@ -18,7 +18,6 @@ void integrationTest(char *filename);
 
 /**
  * @brief
- *
  */
 void integrationTestUART();
 
