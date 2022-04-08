@@ -40,8 +40,6 @@ kernel & user mode
 #ifndef FTD2XX_H
 #define FTD2XX_H
 
-#define _WIN32
-
 #ifdef _WIN32
 
 #include <windef.h>

@@ -25,6 +25,7 @@ int main(int argc, char **argv) {
             printf("Please enter a path\n");
             return EXIT_FAILURE;
         }
+        printf("Executing file!\n");
         integrationTest(argv[2]);
     } else if (strcmp("-usb", argv[1]) == 0) {
         printf("Warning : this will only work when compiled on windows\n");
