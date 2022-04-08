@@ -26,19 +26,24 @@ absorp lecture(FILE *file_pf, int *file_state)
         {
             if (!((data[i] >= '0' && data[i] <= '9') || data[i] == ','))
             {
-                if (first_weird_char == -1)
-                {
+                data[i] = '^';
+                if(first_weird_char == -1) {
                     first_weird_char = i;
                 }
             }
         }
+        char data2[21];
+        for (i = 0; i < 21; i++)
+        {
+            data2[i] = '-';
+        }
+        memcpy(data2, data + first_weird_char + 1, 21 - first_weird_char - 1);
 
-        long pointer = ftell(file_pf) - 21 + first_weird_char + 1;
-        fseek(file_pf, pointer, SEEK_SET);
+        memcpy(data, data2, 21 - first_weird_char - 1);
+        bytes_read = fread(data + (21 - first_weird_char - 1), sizeof(char),
+                first_weird_char + 1, file_pf);
 
-        bytes_read = fread(data, sizeof(char), 21, file_pf);
-
-        if (bytes_read != 21)
+        if (bytes_read != first_weird_char + 1)
         {
             // Error, sad face :(
             *file_state = EOF;
@@ -73,7 +78,9 @@ absorp lecture(FILE *file_pf, int *file_state)
  *
  */
 #if defined(WIN32) || defined(_WIN32) || \
-    defined(__WIN32) && !defined(__CYGWIN__)
+    defined(__WIN32) || defined(__CYGWIN__)
+
+#define _WIN32
 
 #include <Windows.h> // comes first
 
@@ -136,7 +143,9 @@ absorp read_UART(void *handle, int *file_state)
             if (!((data[i] >= '0' && data[i] <= '9') || data[i] == ','))
             {
                 data[i] = '^';
-                first_weird_char = i;
+                if(first_weird_char == -1) {
+                    first_weird_char = i;
+                }
             }
         }
         char data2[21];
@@ -146,20 +155,10 @@ absorp read_UART(void *handle, int *file_state)
         }
         memcpy(data2, data + first_weird_char + 1, 21 - first_weird_char - 1);
 
-        // printf("%d : %d\n", first_weird_char, bytes_read);
-
-        // fwrite(data, sizeof(char), 21, stdout);
-        // fwrite("\n", sizeof(char), 1, stdout);
-        // fwrite(data2, sizeof(char), 21, stdout);
-        // fwrite("\n", sizeof(char), 1, stdout);
         memcpy(data, data2, 21 - first_weird_char - 1);
         FT_Read(handle, data + (21 - first_weird_char - 1),
                 first_weird_char + 1, &bytes_read);
 
-        // fwrite(data, sizeof(char), 21, stdout);
-        // fwrite("\n", sizeof(char), 1, stdout);
-
-        // printf("2/ %d : %d\n", first_weird_char, bytes_read);
         if (bytes_read != first_weird_char + 1)
         {
             // Error, sad face :(

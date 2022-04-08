@@ -60,6 +60,10 @@ void affichage(oxy myOxy)
 
         fclose(fp);
 
-        remove(".verrouData");
+        int ret, tries = 0;
+        do {
+            ret = remove(".verrouData");
+            tries++;
+        } while(ret != 0 && tries < 5);
     }
 }
