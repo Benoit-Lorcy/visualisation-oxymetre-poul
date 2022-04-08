@@ -26,4 +26,4 @@ clean:
 
 # Create zip for automatic tests
 zip: 
-	zip test_files.zip *.c *.h -x main.c
+	zip test_files.zip *.c *.h -x main.c ftd2xx.h

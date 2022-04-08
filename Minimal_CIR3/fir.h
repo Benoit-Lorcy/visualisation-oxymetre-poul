@@ -5,10 +5,10 @@
 #include "fichiers.h"
 
 /**
- * @brief
- *
+ * @brief Parameters for the FIR filter
  */
-typedef struct {
+typedef struct
+{
     absorp *firBuffer;
     float *coefFiltre;
     int ordreFiltre;

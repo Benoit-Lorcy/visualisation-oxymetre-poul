@@ -5,17 +5,17 @@
 #include "fichiers.h"
 
 /**
- * @brief
- *
+ * @brief Parameters for the IIR filter
  */
-typedef struct {
-    float alpha;
-    absorp lastInput;
-    absorp lastOutput;
+typedef struct
+{
+    float alpha;       /*  */
+    absorp lastInput;  /*  */
+    absorp lastOutput; /* Despacito */
 } param_iir;
 
 /**
- * @brief
+ * @brief IIR Filter function for automatic tests
  *
  * @param filename
  * @return absorp
@@ -23,7 +23,8 @@ typedef struct {
 absorp iirTest(char *filename);
 
 /**
- * @brief
+ * @brief IIR Filter initialisation
+ *
  *
  * @param alpha
  * @return param_iir*
@@ -31,7 +32,7 @@ absorp iirTest(char *filename);
 param_iir *initIIR(float alpha);
 
 /**
- * @brief
+ * @brief IIR Filter : infinite impulse response
  *
  * @param myAbsorb
  * @param myIIR
@@ -40,7 +41,7 @@ param_iir *initIIR(float alpha);
 absorp iir(absorp myAbsorb, param_iir *myIIR);
 
 /**
- * @brief
+ * @brief free memory allocated to param_iir at initialisation
  *
  * @param myIIR
  */
