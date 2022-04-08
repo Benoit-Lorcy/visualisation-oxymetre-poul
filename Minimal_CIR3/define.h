@@ -12,20 +12,20 @@
  * @brief absorption values for red light and infrared light
  */
 typedef struct {
-    float acr;  /*!< AC R */
-    float dcr;  /*!< DC R */
-    float acir; /*!< AC IR */
-    float dcir; /*!< DC IR */
+    float acr;  /** AC R */
+    float dcr;  /** DC R */
+    float acir; /** AC IR */
+    float dcir; /** DC IR */
 } absorp;
 
 /**
- * @struct absorp
+ * @struct oxy
  *
- * @brief Oui
+ * @brief spo2 -> oxygen saturation of blood, pouls -> heart BPM
  */
 typedef struct {
-    int spo2;  /*!< SPO2 */
-    int pouls; /*!< Pouls */
+    int spo2;  /** SPO2 */
+    int pouls; /** Pouls */
 } oxy;
 
 #endif  // DEFINE_H

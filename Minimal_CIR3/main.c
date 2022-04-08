@@ -9,6 +9,7 @@
 #include "mesure.h"
 
 int main(int argc, char **argv) {
+    // If no arguments, leave program with failure code
     if (argc < 2) {
         printf(
             "Not enought arguments\nTry reading README for more "
@@ -16,7 +17,10 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }
 
+    // We use the argument to start the program to read file or to read usb
+    // strcmp return 0 if there is no difference between 2 strings
     if (strcmp("-file", argv[1]) == 0) {
+        // If no path, leave program with failure code
         if (argc < 3) {
             printf("Please enter a path\n");
             return EXIT_FAILURE;
@@ -26,7 +30,8 @@ int main(int argc, char **argv) {
         printf("Warning : this will only work when compiled on windows\n");
         integrationTestUART();
     } else {
-        printf("illegal argument\n");
+        printf("Illegal argument\n");
+        return EXIT_FAILURE;
     }
 
     return EXIT_SUCCESS;

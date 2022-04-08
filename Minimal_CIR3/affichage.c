@@ -2,9 +2,18 @@
 
 #include <stdio.h>
 
+/**
+ * conditional compilation for windows and linux
+ */
 #if defined(WIN32) || defined(_WIN32) || \
     defined(__WIN32) && !defined(__CYGWIN__)
 
+/**
+ * @brief
+ *
+ * @param szPath
+ * @return int
+ */
 int FileExists(LPCTSTR szPath) {
     DWORD dwAttrib = GetFileAttributes(szPath);
 
@@ -14,12 +23,18 @@ int FileExists(LPCTSTR szPath) {
 
 #else
 #include <unistd.h>
-
+/**
+ * @brief
+ *
+ * @param szPath
+ * @return int
+ */
 int FileExists(char *szPath) { return access(szPath, F_OK) != -1; }
 
 #endif
 
 void affichage(oxy myOxy) {
+    // -> to change?
     if (access(".verrouData", F_OK) != -1) {
         // Sad
     } else {

@@ -9,7 +9,17 @@
 #include "lecture.h"
 #include "mesure.h"
 
+/**
+ * @brief
+ *
+ * @param filename
+ */
 void integrationTest(char *filename);
+
+/**
+ * @brief
+ *
+ */
 void integrationTestUART();
 
 #endif
