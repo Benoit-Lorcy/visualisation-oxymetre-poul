@@ -39,11 +39,7 @@ void affichage(oxy myOxy)
     // Check if .verrouData exists
     // If it exits, it means that we are already writting to the filke or the java interface is reading the file
     // So we only write into the file if .verrouData don't exists
-    if (access(".verrouData", F_OK) != -1)
-    {
-        // Sad
-    }
-    else
+    if (access(".verrouData", F_OK) == -1)
     {
         FILE *fp = fopen(".verrouData", "w");
 

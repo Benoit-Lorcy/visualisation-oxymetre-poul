@@ -37,9 +37,11 @@ MesureEnv *mesure_init()
 		return NULL;
 	}
 
+	// We could use calloc instead of doing it in 2 steps, but 2 > 1
 	memset(env, 0, sizeof(MesureEnv));
 	env->can_be_zero = 1;
 
+	// Valeurs par defaut correspondent qa 70 BPM et 85% Sp02
 	int i = 0;
 	for (; i < 8; i++)
 	{
@@ -56,6 +58,7 @@ oxy mesure(MesureEnv *env, absorp data)
 {
 	env->counter++;
 
+	// Etat 0 : Mise en place de la variable previous, 1 : Recherche du premier 0, 2 : Recherche du prochain 0, etat final
 	switch (env->mesure_state)
 	{
 	case 0:
@@ -71,10 +74,11 @@ oxy mesure(MesureEnv *env, absorp data)
 		}
 		break;
 	case 2:
+		// ACR passent a nouveau par 0
 		if (env->can_be_zero && (((env->previous.acr > 0 && data.acr <= 0) || (env->previous.acr < 0 && data.acr >= 0))))
 		{
 			env->zero_count++;
-			env->can_be_zero = 0;
+			env->can_be_zero = 0; // Variable permet de prendre en compte que ACR peut etre instable -> empeche le comptage de plusieurs 0 au lieu de juste 1
 
 			if (env->zero_count == 3)
 			{
@@ -103,10 +107,13 @@ oxy mesure(MesureEnv *env, absorp data)
 			}
 		}
 
+		// Si ACR depasse une certaine valeur, l'instabilite de ACR ne permet plus d'etre detecte comme un faux 0
 		if (data.acr > VALUE_TO_CLEAR || data.acr < VALUE_TO_CLEAR)
 		{
 			env->can_be_zero = 1;
 		}
+
+		// Record the maximum and minimum of ACR and ACIR during the period
 		if (data.acr > env->r_maximum)
 		{
 			env->r_maximum = data.acr;
@@ -124,6 +131,7 @@ oxy mesure(MesureEnv *env, absorp data)
 			env->ir_minimum = data.acir;
 		}
 
+		// Take a value of DC
 		env->r_dc_average = (env->r_dc_average + data.dcr) / 2.0f;
 		env->ir_dc_average = (env->ir_dc_average + data.dcir) / 2.0f;
 		break;
