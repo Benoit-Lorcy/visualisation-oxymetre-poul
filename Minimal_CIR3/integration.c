@@ -154,7 +154,6 @@ void integrationTestUART()
     // processing UART
     do
     {
-        printf("Start\n");
         absorp current = read_UART(uart, &etat);
 
         if (etat != EOF)
