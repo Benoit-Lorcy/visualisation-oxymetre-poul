@@ -51,13 +51,18 @@ param_iir *initIIR(float alpha)
 absorp iir(absorp myAbsorp, param_iir *myIIR)
 {
     absorp tempAbsorp = myAbsorp;
+
+    // filter
     myAbsorp.acr = myAbsorp.acr - myIIR->lastInput.acr +
                    myIIR->alpha * myIIR->lastOutput.acr;
     myAbsorp.acir = myAbsorp.acir - myIIR->lastInput.acir +
                     myIIR->alpha * myIIR->lastOutput.acir;
+
+    // save values before rounding to have expected values
     myIIR->lastInput = tempAbsorp;
     myIIR->lastOutput = myAbsorp;
 
+    // rounding values with cast
     myAbsorp.acr = (int)(myAbsorp.acr);
     myAbsorp.acir = (int)(myAbsorp.acir);
 
