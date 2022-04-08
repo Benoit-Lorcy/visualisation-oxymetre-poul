@@ -14,7 +14,8 @@
  * @param szPath
  * @return int
  */
-int FileExists(LPCTSTR szPath) {
+int FileExists(LPCTSTR szPath)
+{
     DWORD dwAttrib = GetFileAttributes(szPath);
 
     return (dwAttrib != INVALID_FILE_ATTRIBUTES &&
@@ -33,17 +34,24 @@ int FileExists(char *szPath) { return access(szPath, F_OK) != -1; }
 
 #endif
 
-void affichage(oxy myOxy) {
-    // -> to change?
-    if (access(".verrouData", F_OK) != -1) {
+void affichage(oxy myOxy)
+{
+    // Check if .verrouData exists
+    // If it exits, it means that we are already writting to the filke or the java interface is reading the file
+    // So we only write into the file if .verrouData don't exists
+    if (access(".verrouData", F_OK) != -1)
+    {
         // Sad
-    } else {
+    }
+    else
+    {
         FILE *fp = fopen(".verrouData", "w");
 
-        if(fp == NULL) {
+        if (fp == NULL)
+        {
             return;
         }
-        
+
         fclose(fp);
 
         fp = fopen("Data.txt", "w");

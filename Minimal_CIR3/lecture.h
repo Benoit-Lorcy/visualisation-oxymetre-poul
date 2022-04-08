@@ -4,21 +4,21 @@
 #include "define.h"
 
 /**
- * @brief
+ * @brief UART initialisation with ftd2xx
  *
  * @return void*
  */
 void *init_UART();
 
 /**
- * @brief
+ * @brief Close UART connection
  *
  * @param handle
  */
 void close_UART(void *handle);
 
 /**
- * @brief
+ * @brief  Read current data of UART connection
  *
  * @param handle
  * @param file_state
@@ -27,7 +27,7 @@ void close_UART(void *handle);
 absorp read_UART(void *handle, int *file_state);
 
 /**
- * @brief
+ * @brief Same as lireFichier with error handlling
  *
  * @param file_pf
  * @param file_state

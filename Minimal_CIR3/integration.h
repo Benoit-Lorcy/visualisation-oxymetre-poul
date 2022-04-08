@@ -10,14 +10,14 @@
 #include "mesure.h"
 
 /**
- * @brief
+ * @brief Use a file as input to run the program
  *
  * @param filename
  */
 void integrationTest(char *filename);
 
 /**
- * @brief
+ * @brief Use usb as input to run the program
  */
 void integrationTestUART();
 

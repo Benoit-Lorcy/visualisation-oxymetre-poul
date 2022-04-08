@@ -6,26 +6,26 @@
 #include "define.h"
 
 /**
- * @brief
+ * @brief Initialise file reading
  *
  * @param nomFichier
  * @return FILE*
  */
-FILE* initFichier(char* nomFichier);
+FILE *initFichier(char *nomFichier);
 
 /**
- * @brief
+ * @brief Read current file
  *
  * @param pf
  * @param etat
  * @return absorp
  */
-absorp lireFichier(FILE* pf, int* etat);
+absorp lireFichier(FILE *pf, int *etat);
 
 /**
- * @brief
+ * @brief Close file
  *
  * @param pf
  */
-void finFichier(FILE* pf);
+void finFichier(FILE *pf);
 #endif

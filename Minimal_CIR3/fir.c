@@ -1,6 +1,8 @@
 #include "fir.h"
 
-absorp firTest(char *filename) {
+absorp firTest(char *filename)
+{
+    // initialise coeficients
     float FIR_TAPS[51] = {
         1.4774946e-019, 1.6465231e-004, 3.8503956e-004, 7.0848037e-004,
         1.1840522e-003, 1.8598621e-003, 2.7802151e-003, 3.9828263e-003,
@@ -15,65 +17,76 @@ absorp firTest(char *filename) {
         9.5104679e-003, 7.3374938e-003, 5.4962252e-003, 3.9828263e-003,
         2.7802151e-003, 1.8598621e-003, 1.1840522e-003, 7.0848037e-004,
         3.8503956e-004, 1.6465231e-004, 1.4774946e-019};
-
     int etat = 0;
     int ordreFiltre = 51;
+
     absorp myAbsorp;
     absorp saveAbsorp;
 
+    // file and fir initialisation
     param_fir *myFIR = initFir(FIR_TAPS, ordreFiltre);
-
     FILE *myFile = initFichier(filename);
-    do {
+
+    // reading file and applying the filter
+    do
+    {
         myAbsorp = lireFichier(myFile, &etat);
-        if (etat != EOF) {
+        if (etat != EOF)
+        {
             myAbsorp = fir(myAbsorp, myFIR);
             saveAbsorp = myAbsorp;
         }
     } while (etat != EOF);
 
+    // free memory
     finFichier(myFile);
     finFir(myFIR);
 
+    // return last value, (that's why we need to save it in the while)
     return saveAbsorp;
 }
 
-param_fir *initFir(float *coefFiltre, int ordreFiltre) {
+param_fir *initFir(float *coefFiltre, int ordreFiltre)
+{
     param_fir *myFIR = malloc(sizeof(param_fir));
     myFIR->coefFiltre = coefFiltre;
     myFIR->ordreFiltre = ordreFiltre;
     // on met des 0 dans firBuffer comme ça on peut l'utiliser dans les calculs
-    // sans risque à la base j'avais un calloc mais moins on touche a la mémoire
-    // mieux on se porte ;) humm ça marche pas sans calloc :aled:
-    absorp firBuffer[51] = {0};
     myFIR->firBuffer = calloc(ordreFiltre, sizeof(absorp));
 
     return myFIR;
 }
 
-absorp fir(absorp myAbsorp, param_fir *myFIR) {
+absorp fir(absorp myAbsorp, param_fir *myFIR)
+{
     absorp tempAbsorb = {
         .acir = 0, .acr = 0, .dcir = myAbsorp.dcir, .dcr = myAbsorp.dcr};
 
+    // we move the memory to the right so we can add a new element in front
     memmove(myFIR->firBuffer + 1, myFIR->firBuffer,
             sizeof(absorp) * (myFIR->ordreFiltre - 1));
 
+    // add the new element to the list
     myFIR->firBuffer[0] = myAbsorp;
 
+    // appling the filter the filter
     int i;
-    for (i = 0; i < myFIR->ordreFiltre; i++) {
+    for (i = 0; i < myFIR->ordreFiltre; i++)
+    {
         tempAbsorb.acr += myFIR->coefFiltre[i] * myFIR->firBuffer[i].acr;
         tempAbsorb.acir += myFIR->coefFiltre[i] * myFIR->firBuffer[i].acir;
     }
 
+    // we format the output by casting it to an int
     tempAbsorb.acir = (int)(tempAbsorb.acir);
     tempAbsorb.acr = (int)(tempAbsorb.acr);
 
     return tempAbsorb;
 }
 
-void finFir(param_fir *myFIR) {
-    // free all
+void finFir(param_fir *myFIR)
+{
+    // free all pointer with allocated memory
     free(myFIR->firBuffer);
     free(myFIR);
     return;

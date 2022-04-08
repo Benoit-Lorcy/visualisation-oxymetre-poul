@@ -9,9 +9,9 @@
  */
 typedef struct
 {
-    float alpha;       /*  */
-    absorp lastInput;  /*  */
-    absorp lastOutput; /* Despacito */
+    float alpha;       /* Iir coefficient */
+    absorp lastInput;  /* Last iir input */
+    absorp lastOutput; /* Last iir output */
 } param_iir;
 
 /**
